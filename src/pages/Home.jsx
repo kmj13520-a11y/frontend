@@ -4,6 +4,11 @@ import { Link } from "react-router-dom";
 
 export default function Home() {
   const [users, setUsers] = useState([]); //유저객체 배열
+  // 삭제하기 함수
+  const deleteUser = async (id) => {
+    await axios.delete(`http://localhost:8080/users/${id}`);
+    loadUsers(); //삭제후에 다시 삭제된 개 유저배열을 받음
+  };
   //백엔드에서 유저들을 가져오는 함수
   const loadUsers = async () => {
     const result = await axios.get("http://localhost:8080/users");
@@ -40,7 +45,12 @@ export default function Home() {
                 >
                   수정
                 </Link>
-                <button className="btn btn-outline-danger mx-2">삭제</button>
+                <button
+                  onClick={() => deleteUser(user.id)}
+                  className="btn btn-outline-danger mx-2"
+                >
+                  삭제
+                </button>
               </td>
             </tr>
           ))}

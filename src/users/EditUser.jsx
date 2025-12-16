@@ -29,7 +29,7 @@ export default function EditUser() {
   };
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:8080/users", user);
+    await axios.put(`http://localhost:8080/users/${id}`, user);
     //성공적으로 보낸후 기본페이지로
     navigate("/");
   };
@@ -89,7 +89,7 @@ export default function EditUser() {
                 type="submit"
                 className="btn btn-outline-primary px-3 mx-2"
               >
-                가입
+                수정
               </button>
               <Link to="/" className="btn btn-outline-danger px-3 mx-2">
                 취소
